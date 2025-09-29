@@ -12,10 +12,16 @@
     "lint:fix": "eslint --fix --ext .ts,.js,.vue ."
   },
   "dependencies": {
+    "@motionone/vue": "^10.16.4",
     "@nuxt/eslint": "^1.9.0",
     "@nuxt/image": "^1.11.0",
     "@nuxt/ui": "^3.3.4",
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@oku-ui/motion": "^0.4.3",
     "@tailwindcss/vite": "^4.1.13",
+    "@tsparticles/slim": "^3.9.1",
+    "@tsparticles/vue3": "^3.0.1",
+    "daisyui": "^5.1.23",
     "nuxt": "^4.1.2",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
@@ -24,6 +30,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^5.4.1",
-    "eslint": "^9.36.0"
+    "@iconify-json/devicon": "^1.2.45",
+    "@iconify-json/lucide": "^1.2.68",
+    "eslint": "^9.36.0",
+    "eslint-plugin-format": "^1.0.2"
   }
 }

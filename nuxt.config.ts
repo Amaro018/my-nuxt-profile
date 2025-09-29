@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts'],
+  modules: ['@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@nuxtjs/google-fonts', '@nuxtjs/color-mode', 'nuxt-auth-utils'],
   eslint: {
     config: {
       standalone: false,
@@ -20,5 +20,8 @@ export default defineNuxtConfig({
     families: {
       'Press+Start+2P': true,
     },
+  },
+  colorMode: {
+    dataValue: 'theme',
   },
 });

@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import ThemeToggle from './theme-toggle.vue';
+</script>
+
 <template>
-  <div class="navbar bg-base-100 shadow-sm">
+  <div class="navbar bg-base-100 shadow-sm nintendo-text">
     <div class="navbar-start">
       <div class="dropdown">
         <div
@@ -35,7 +39,7 @@
           <li><a>Item 3</a></li>
         </ul>
       </div>
-      <a class="btn btn-ghost text-xl">daisyUI</a>
+      <a class="btn btn-ghost text-xl">Jhomari</a>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
@@ -53,7 +57,7 @@
       </ul>
     </div>
     <div class="navbar-end">
-      <a class="btn">Button</a>
+      <ThemeToggle />
     </div>
   </div>
 </template>

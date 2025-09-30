@@ -65,7 +65,7 @@ const isVisible = ref(true);
             Junior Full-Stack Developer
           </p>
 
-          <p class="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto text-pretty">
+          <p class="text-md text-muted-foreground mb-8 max-w-2xl mx-auto">
             I craft pixel-perfect digital experiences with the spirit of adventure.
             Specializing in React, Next.js, and catching all the bugs in the wild.
           </p>
@@ -98,7 +98,7 @@ const isVisible = ref(true);
               class="flex gap-4 items-center hover:transform hover:scale-105"
               target="_blank"
             >
-              <button class="btn btn-ghost">
+              <button class="btn btn-ghost !hover:underline">
                 <Icon name="lucide:github" class="h-6 w-6" />
               </button>
             </NuxtLink>

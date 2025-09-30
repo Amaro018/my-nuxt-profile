@@ -21,7 +21,7 @@ const linkX = useTransform(scrollYProgress, [0, 1], ['0vw', '100vw']);
     </Motion>
 
     <AppHero />
-    <section id="skills" class="md:p-16">
+    <section id="skills">
       <AppSkills />
     </section>
     <section id="projects">

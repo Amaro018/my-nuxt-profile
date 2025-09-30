@@ -165,11 +165,19 @@ function handleSubmit() {
               />
             </fieldset>
 
-            <div>
+            <div class="my-2">
               <button
-                class="btn btn-neutral w-full nintendo-text animate-blink"
+                v-if="!formData.name.length || !formData.email.length || !formData.subject.length || !formData.message.length"
+                disabled
+                class="btn btn-neutral w-full nintendo-text"
+              >
+                PRESS HERE TO SUBMIT
+              </button>
+              <button
+                v-else
+                class="btn btn-neutral w-full nintendo-text"
                 :class="{
-                  'animate-blink-fast': formData.name.length > 0,
+                  'animate-blink': formData.name.length > 0 && formData.email.length > 0 && formData.subject.length > 0 && formData.message.length > 0,
                 }"
                 type="submit"
               >

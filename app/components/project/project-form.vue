@@ -4,8 +4,9 @@ const props = defineProps<{ projectData: any }>();
 const emit = defineEmits<{
   (e: 'showModal'): void;
   (e: 'submit', data: any): void;
+  (e: 'update:isSubmitting', value: boolean): void;
 }>();
-
+const isSubmitting = ref(false);
 const imageUrl = ref<string | null>(null);
 const fileInputRef = ref<HTMLInputElement | null>(null);
 
@@ -18,8 +19,32 @@ const localProjectData = ref({
   imageFile: null as File | null,
 });
 
-function handleSubmit() {
+async function handleSubmit() {
+  isSubmitting.value = true;
+  emit('update:isSubmitting', true);
+
+  // Simulate async work. Replace with real logic if needed.
   emit('submit', { ...localProjectData.value });
+
+  // Clear form (reset fields to default/empty values)
+  localProjectData.value = {
+    name: '',
+    description: '',
+    category: '',
+    live_demo: '',
+    github_link: '',
+    imageFile: null,
+  };
+  imageUrl.value = null;
+  if (fileInputRef.value) {
+    fileInputRef.value.value = '';
+  }
+
+  isSubmitting.value = false;
+  emit('update:isSubmitting', false);
+
+  // Close modal
+  emit('showModal');
 }
 
 function handleFileChange(event: Event) {
@@ -59,7 +84,7 @@ function handleFileChange(event: Event) {
         v-model="localProjectData.description"
         type="text"
         placeholder="Project Description"
-        class="input w-full"
+        class="input w-full textarea h-6"
       >
 
       <select
@@ -70,7 +95,7 @@ function handleFileChange(event: Event) {
           Select a category
         </option>
         <option value="featured">
-          Web Development
+          Featured
         </option>
         <option value="web development">
           Web Development
@@ -113,9 +138,12 @@ function handleFileChange(event: Event) {
           class="w-48 h-48 object-cover rounded"
         >
       </div>
-
-      <button type="submit" class="btn">
-        Submit
+      <button
+        type="submit"
+        class="btn"
+        :disabled="isSubmitting"
+      >
+        {{ isSubmitting ? 'Submitting...' : 'Submit' }}
       </button>
       <button class="btn" @click="emit('showModal')">
         Close

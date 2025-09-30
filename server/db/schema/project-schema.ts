@@ -18,8 +18,8 @@ const projectInsertSchema = createInsertSchema(projects, {
   category: schema => schema.min(3),
   description: schema => schema.min(3),
   image: schema => schema.min(3),
-  live_demo: schema => schema.min(3),
-  github_link: schema => schema.min(3),
+  live_demo: schema => schema.nullable(),
+  github_link: schema => schema.nullable(),
 }).omit({
   id: true,
   createdAt: true,

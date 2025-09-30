@@ -107,7 +107,7 @@ function prevPage() {
             {{ project.category }}
           </p>
 
-          <div class="card-actions justify-end mt-2">
+          <div class="card-actions justify-center mt-2">
             <div class="flex flex-col gap-2 w-full sm:flex-row sm:w-auto">
               <NuxtLink
                 v-if="project.github_link"
@@ -137,7 +137,7 @@ function prevPage() {
     </div>
 
     <!-- Pagination -->
-    <div class="flex justify-center mt-8 gap-4">
+    <div class="flex justify-center mt-8 gap-4 py-10">
       <button
         class="btn"
         :disabled="currentPage === 1"

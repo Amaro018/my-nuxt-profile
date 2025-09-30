@@ -6,7 +6,7 @@ defineProps<{ projects: any }>();
   <div
     v-for="project in projects"
     :key="project.id"
-    class="card bg-base-100 w-full shadow-sm p-4 md:w-96 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+    class="card bg-base-100 w-full shadow-sm p-4 md:w-96 transform transition-transform duration-300 hover:scale-105 hover:shadow-lg "
   >
     <figure>
       <img

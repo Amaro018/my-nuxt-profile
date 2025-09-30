@@ -17,6 +17,7 @@ const currentUser = computed(() => user.value as SessionUser);
 
 const showModal = ref(false);
 
+const isSubmitting = ref(false);
 function handleOpen() {
   showModal.value = true;
 }
@@ -31,6 +32,7 @@ const projectData = ref({
 });
 
 async function handleSubmit(data: typeof projectData.value) {
+  isSubmitting.value = true;
   const payload = new FormData();
 
   payload.append('name', data.name);
@@ -48,11 +50,16 @@ async function handleSubmit(data: typeof projectData.value) {
       method: 'POST',
       body: payload,
     });
-    refresh();
+
     console.warn('Project created successfully');
   }
   catch (e) {
     console.error(e);
+  }
+  finally {
+    isSubmitting.value = false;
+
+    refresh();
   }
 }
 </script>
@@ -74,7 +81,7 @@ async function handleSubmit(data: typeof projectData.value) {
         Add a project
       </button>
     </div>
-    <div class="my-10 flex flex-col gap-4 md:flex-row">
+    <div class="my-10 flex flex-wrap gap-4 md:flex-row">
       <ProjectList :projects="projects" />
     </div>
 
@@ -83,6 +90,7 @@ async function handleSubmit(data: typeof projectData.value) {
       <div class="modal-box">
         <ProjectForm
           :project-data="projectData"
+          :is-submitting="isSubmitting"
           @show-modal="showModal = false"
           @submit="handleSubmit"
         />

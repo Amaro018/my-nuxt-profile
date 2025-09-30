@@ -38,7 +38,7 @@ function handleSubmit() {
 </script>
 
 <template>
-  <div>
+  <div class="">
     <Motion
       tag="div"
       class="my-10 md:px-16"

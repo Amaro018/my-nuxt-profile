@@ -3,7 +3,7 @@ import ThemeToggle from './theme-toggle.vue';
 </script>
 
 <template>
-  <div class="navbar bg-base-100 shadow-sm nintendo-text fixed z-999">
+  <div class="navbar bg-base-100 shadow-sm nintendo-text z-999">
     <div class="navbar-start">
       <div class="dropdown">
         <div

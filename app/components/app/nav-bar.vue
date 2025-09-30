@@ -28,36 +28,28 @@ import ThemeToggle from './theme-toggle.vue';
           tabindex="0"
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
-          <li><a>Item 1</a></li>
+          <li><a href="#skills">Skills</a></li>
           <li>
-            <a>Parent</a>
-            <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
+            <a href="#projects">Projects</a>
           </li>
-          <li><a>Item 3</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <NuxtLink to="/">
-        <p class="btn btn-ghost text-xl">
+      <NuxtLink to="/" class="flex items-center">
+        <p>&lt;</p>
+        <p class="btn btn-ghost text-md">
           Jhomari
         </p>
+        <p>/&gt;</p>
       </NuxtLink>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a>Item 1</a></li>
+        <li><a href="#skills">Skills</a></li>
         <li>
-          <details>
-            <summary>Parent</summary>
-            <ul class="p-2">
-              <li><a>Submenu 1</a></li>
-              <li><a>Submenu 2</a></li>
-            </ul>
-          </details>
+          <a href="#projects">Projects</a>
         </li>
-        <li><a>Item 3</a></li>
+        <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
     <div class="navbar-end">

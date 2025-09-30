@@ -2,7 +2,7 @@
 import { Motion } from 'motion-v';
 
 const yahooSound = ref<HTMLAudioElement | null>(null);
-
+const isSubmitting = ref(false);
 const formData = ref({
   name: '',
   email: '',
@@ -11,6 +11,7 @@ const formData = ref({
 });
 
 function handleSubmit() {
+  isSubmitting.value = true;
   try {
     const res = $fetch('/api/mail', {
       method: 'POST',
@@ -18,14 +19,21 @@ function handleSubmit() {
     });
       // Play sound
     yahooSound.value?.play();
+    formData.value = {
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    };
+
     console.warn(res);
   }
   catch (e) {
     console.error(e);
   }
-
-  // (Optional) Add your form submit logic here (API call, email sending, etc.)
-  console.warn('Form submitted!', formData.value);
+  finally {
+    isSubmitting.value = false;
+  }
 }
 </script>
 
@@ -55,9 +63,12 @@ function handleSubmit() {
       >
         <fieldset class="fieldset bg-nutral-200 border-base-300 rounded-box w-full md:w-lg border p-4">
           <legend class="fieldset-legend nintendo-text">
-            REACH ME ON
+            GET IN TOUCH
           </legend>
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-4 nintendo-text">
+            <p>
+              Feel free to reach out to me for any questions or opportunities. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision
+            </p>
             <NuxtLink
               to="https://github.com/Amaro018"
               class="flex gap-4 items-center hover:underline"
@@ -155,8 +166,14 @@ function handleSubmit() {
             </fieldset>
 
             <div>
-              <button class="btn btn-neutral w-full nintendo-text animate-blink" type="submit">
-                CLICK TO SUBMIT
+              <button
+                class="btn btn-neutral w-full nintendo-text animate-blink"
+                :class="{
+                  'animate-blink-fast': formData.name.length > 0,
+                }"
+                type="submit"
+              >
+                {{ isSubmitting ? 'Sending...' : 'PRESS HERE TO SUBMIT' }}
               </button>
             </div>
           </fieldset>

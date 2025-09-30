@@ -3,7 +3,7 @@ import { Motion } from 'motion-v';
 </script>
 
 <template>
-  <div>
+  <div class="">
     <Motion
       tag="div"
       class="my-10 md:px-16"
@@ -12,7 +12,7 @@ import { Motion } from 'motion-v';
       :viewport="{ once: true, amount: 0.3 }"
       :transition="{ duration: 0.6 }"
     >
-      <p class="text-center nintendo-text">
+      <p class="text-center nintendo-text my-10">
         Skills
       </p>
     </Motion>

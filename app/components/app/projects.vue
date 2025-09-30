@@ -5,10 +5,10 @@ const { data: projects } = useFetch('/api/project');
 </script>
 
 <template>
-  <div class="my-10 bg-base-200 flex-row md:flex-col p-16">
+  <div class="bg-base-200 flex-row md:flex-col md:p-16">
     <Motion
       tag="div"
-      class="my-10 md:px-16"
+      class="md:px-16  my-10"
       :initial="{ opacity: 0, x: -50 }"
       :while-in-view="{ opacity: 1, x: 0 }"
       :viewport="{ once: true, amount: 0.3 }"
@@ -19,7 +19,7 @@ const { data: projects } = useFetch('/api/project');
       </p>
     </Motion>
 
-    <div class="my-10 flex flex-wrap gap-4">
+    <div class=" flex flex-wrap gap-4">
       <Motion
         v-for="(project, index) in projects"
         :key="project.id"
@@ -51,6 +51,7 @@ const { data: projects } = useFetch('/api/project');
                 v-if="project.github_link"
                 :to="project.github_link"
                 class="flex-1"
+                target="_blank"
               >
                 <button class="btn btn-neutral w-full sm:w-auto">
                   Repository <Icon name="lucide:github" class="h-6 w-6" />
@@ -61,6 +62,7 @@ const { data: projects } = useFetch('/api/project');
                 v-if="project.live_demo"
                 :to="project.live_demo"
                 class="flex-1"
+                target="_blank"
               >
                 <button class="btn btn-accent w-full sm:w-auto">
                   Live Demo <Icon name="lucide:external-link" class="h-6 w-6" />

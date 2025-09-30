@@ -72,21 +72,30 @@ const isVisible = ref(true);
 
           <!-- Action Buttons -->
           <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <button
-              class="btn btn-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-            >
-              View My Projects
-            </button>
-            <button class="btn btn-outline btn-secondary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              Download Resume
-            </button>
+            <a href="#projects">
+
+              <button
+                class="btn btn-primary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                View My Projects
+              </button>
+            </a>
+            <a href="/files/resume.pdf" target="_blank">
+              <button class="btn btn-outline btn-secondary shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+                Download Resume
+              </button>
+            </a>
           </div>
 
+          <!-- Scroll Down Button -->
+          <a href="#contact">
+            <Icon name="lucide:arrow-down-to-line" class="h-6 w-6 animate-bounce" />
+          </a>
           <!-- Social Buttons -->
           <div class="flex items-center justify-center space-x-6">
             <NuxtLink
               to="https://github.com/Amaro018"
-              class="flex gap-4 items-center hover:underline"
+              class="flex gap-4 items-center hover:transform hover:scale-105"
               target="_blank"
             >
               <button class="btn btn-ghost">
@@ -113,13 +122,6 @@ const isVisible = ref(true);
             </NuxtLink>
           </div>
         </div>
-
-        <!-- Scroll Down Button -->
-        <button
-          class="btn btn-ghost absolute bottom-8 left-1/2 transform -translate-x-1/2 text-muted-foreground hover:text-primary animate-bounce"
-        >
-          <Icon name="lucide:arrow-down-to-line" class="h-6 w-6" />
-        </button>
       </div>
     </div>
   </main>

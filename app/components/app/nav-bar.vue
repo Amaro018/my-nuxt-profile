@@ -39,7 +39,11 @@ import ThemeToggle from './theme-toggle.vue';
           <li><a>Item 3</a></li>
         </ul>
       </div>
-      <a class="btn btn-ghost text-xl">Jhomari</a>
+      <NuxtLink to="/">
+        <p class="btn btn-ghost text-xl">
+          Jhomari
+        </p>
+      </NuxtLink>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">

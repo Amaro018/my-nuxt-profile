@@ -55,7 +55,7 @@ const isVisible = ref(true);
           </div>
 
           <!-- Title -->
-          <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold text-foreground mb-6 text-balance">
+          <h1 class="text-40xl sm:text-6xl lg:text-5xl font-bold text-foreground mb-6 text-balance">
             <span class="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
               Jhomari Amaro
             </span>
@@ -84,15 +84,33 @@ const isVisible = ref(true);
 
           <!-- Social Buttons -->
           <div class="flex items-center justify-center space-x-6">
-            <button class="btn btn-ghost">
-              <Icon name="lucide:github" class="h-6 w-6" />
-            </button>
-            <button class="btn btn-ghost">
-              <Icon name="lucide:linkedin" class="h-6 w-6" />
-            </button>
-            <button class="btn btn-ghost">
-              <Icon name="lucide:twitter" class="h-6 w-6" />
-            </button>
+            <NuxtLink
+              to="https://github.com/Amaro018"
+              class="flex gap-4 items-center hover:underline"
+              target="_blank"
+            >
+              <button class="btn btn-ghost">
+                <Icon name="lucide:github" class="h-6 w-6" />
+              </button>
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.facebook.com/amaro018/"
+              class="flex gap-4 items-center hover:underline"
+              target="_blank"
+            >
+              <button class="btn btn-ghost">
+                <Icon name="lucide:facebook" class="h-6 w-6" />
+              </button>
+            </NuxtLink>
+            <NuxtLink
+              to="https://www.linkedin.com/in/jhomari-amaro-945987242/"
+              class="flex gap-4 items-center hover:underline"
+              target="_blank"
+            >
+              <button class="btn btn-ghost">
+                <Icon name="lucide:linkedin" class="h-6 w-6" />
+              </button>
+            </NuxtLink>
           </div>
         </div>
 

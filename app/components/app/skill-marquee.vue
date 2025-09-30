@@ -1,5 +1,5 @@
 <template>
-  <div class="skills-wrapper">
+  <div class="skills-wrapper p-4">
     <div class="skills-track">
       <div class="skills-row">
         <Icon name="devicon:html5" class="skill" />

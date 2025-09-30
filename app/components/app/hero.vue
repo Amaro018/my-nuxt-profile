@@ -4,7 +4,7 @@ const isVisible = ref(true);
 
 <template>
   <main>
-    <div class="hero min-h-screen bg-base-200 mt-20 md:mt-10">
+    <div class="hero min-h-screen bg-base-200 ">
       <div class="absolute inset-0 overflow-y-hidden mt-20">
         <div>
           <div

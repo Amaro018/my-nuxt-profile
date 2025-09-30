@@ -4,7 +4,7 @@ const isVisible = ref(true);
 
 <template>
   <main>
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-screen bg-base-200 mt-20 md:mt-10">
       <div class="absolute inset-0 overflow-y-hidden mt-20">
         <div>
           <div
@@ -98,13 +98,13 @@ const isVisible = ref(true);
               class="flex gap-4 items-center hover:transform hover:scale-105"
               target="_blank"
             >
-              <button class="btn btn-ghost !hover:underline">
+              <button class="btn btn-ghost ">
                 <Icon name="lucide:github" class="h-6 w-6" />
               </button>
             </NuxtLink>
             <NuxtLink
               to="https://www.facebook.com/amaro018/"
-              class="flex gap-4 items-center hover:underline"
+              class="flex gap-4 items-center hover:transform hover:scale-105"
               target="_blank"
             >
               <button class="btn btn-ghost">
@@ -113,7 +113,7 @@ const isVisible = ref(true);
             </NuxtLink>
             <NuxtLink
               to="https://www.linkedin.com/in/jhomari-amaro-945987242/"
-              class="flex gap-4 items-center hover:underline"
+              class="flex gap-4 items-center hover:transform hover:scale-105"
               target="_blank"
             >
               <button class="btn btn-ghost">

@@ -12,7 +12,7 @@ import { Motion } from 'motion-v';
       :viewport="{ once: true, amount: 0.3 }"
       :transition="{ duration: 0.6 }"
     >
-      <p class="text-center nintendo-text my-10 hover:text-red-500 md:p-16">
+      <p class="text-center nintendo-text my-10 md:p-16">
         Skills
       </p>
     </Motion>

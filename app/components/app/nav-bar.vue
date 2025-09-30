@@ -3,7 +3,7 @@ import ThemeToggle from './theme-toggle.vue';
 </script>
 
 <template>
-  <div class="navbar bg-base-100 shadow-sm nintendo-text">
+  <div class="navbar bg-base-100 shadow-sm nintendo-text fixed z-999">
     <div class="navbar-start">
       <div class="dropdown">
         <div
@@ -28,7 +28,7 @@ import ThemeToggle from './theme-toggle.vue';
           tabindex="0"
           class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
         >
-          <li><a href="#skills">Skills</a></li>
+          <li><a :class="{ underline: $route.params.skill }" href="#skills">Skills</a></li>
           <li>
             <a href="#projects">Projects</a>
           </li>
@@ -45,11 +45,27 @@ import ThemeToggle from './theme-toggle.vue';
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><a href="#skills">Skills</a></li>
         <li>
-          <a href="#projects">Projects</a>
+          <a
+            href="#skills"
+            :class="{ underline: $route.hash === '#skills' }"
+          >
+            Skills
+          </a>
         </li>
-        <li><a href="#contact">Contact</a></li>
+
+        <li>
+          <a
+            href="#projects"
+            :class="{ underline: $route.hash === '#projects' }"
+          >Projects</a>
+        </li>
+        <li>
+          <a
+            href="#contact"
+            :class="{ underline: $route.hash === '#contact' }"
+          >Contact</a>
+        </li>
       </ul>
     </div>
     <div class="navbar-end">

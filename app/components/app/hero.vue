@@ -67,7 +67,6 @@ const isVisible = ref(true);
 
           <p class="text-md text-muted-foreground mb-8 max-w-2xl mx-auto">
             I craft pixel-perfect digital experiences with the spirit of adventure.
-            Specializing in React, Next.js, and catching all the bugs in the wild.
           </p>
 
           <!-- Action Buttons -->

@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Motion } from 'motion-v';
 
+import { useToast } from '../../composables/use-toast';
+
+const { toastMessage, toastType, showToast } = useToast();
+
 const yahooSound = ref<HTMLAudioElement | null>(null);
 const isSubmitting = ref(false);
 const formData = ref({
@@ -18,6 +22,7 @@ function handleSubmit() {
       body: formData.value,
     });
       // Play sound
+    showToast('Message sent successfully', 'success');
     yahooSound.value?.play();
     formData.value = {
       name: '',
@@ -193,5 +198,11 @@ function handleSubmit() {
       src="/sounds/mario.mp3"
       preload="auto"
     />
+
+    <div v-if="toastMessage" class="toast toast-top toast-end z-50 fixed right-4 top-4 nintendo-text">
+      <div role="alert" :class="`alert alert-${toastType}`">
+        <span>{{ toastMessage }}</span>
+      </div>
+    </div>
   </div>
 </template>

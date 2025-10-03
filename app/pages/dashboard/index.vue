@@ -61,11 +61,13 @@ async function handleSubmit(data: typeof projectData.value) {
     if (editingProject.value && editingProject.value.id) {
       // Update existing project
       payload.append('id', editingProject.value.id.toString());
-      await $fetch('/api/project', {
+      const response = await $fetch('/api/project', {
         method: 'PUT', // or 'PUT' depending on your backend
         body: payload,
       });
-      showToast('Project updated successfully', 'success');
+      if (response && response.message) {
+        showToast('Project updated successfully', 'success');
+      }
     }
     else {
       // Create new project
@@ -73,11 +75,12 @@ async function handleSubmit(data: typeof projectData.value) {
         method: 'POST',
         body: payload,
       });
-      console.warn('Project created successfully');
+      showToast('Project created successfully', 'success');
     }
   }
   catch (e) {
     console.error(e);
+    showToast('Failed to create project', 'error');
   }
   finally {
     isSubmitting.value = false;
@@ -97,8 +100,8 @@ function handleDeleteRequest(projectId: number) {
 
 async function confirmDelete() {
   if (pendingDeleteId.value) {
-    await $fetch(`/api/project?id=${pendingDeleteId.value}`, { method: 'DELETE' });
-    showToast('Project deleted successfully', 'success');
+    const response = await $fetch(`/api/project?id=${pendingDeleteId.value}`, { method: 'DELETE' });
+    showToast(response.message, 'error');
     refresh();
     pendingDeleteId.value = null;
     showDeleteConfirm.value = false;
@@ -111,58 +114,59 @@ function cancelDelete() {
 </script>
 
 <template>
-  <div v-if="!currentUser">
-    <p>Unauthorized</p>
-  </div>
-
-  <div v-else class="flex flex-col my-10 nintendo-text md:p-16">
-    <div class="flex flex-col justify-between md:flex-row gap-4">
-      <p class="capitalize text-xs md:text-3xl">
-        dashboard
-      </p>
-      <button
-        class="btn btn-neutral"
-        @click="handleOpen"
-      >
-        Add a project
-      </button>
-    </div>
-    <div class="my-10 flex flex-wrap gap-4 md:flex-row">
-      <ProjectList
-        :projects="projects"
-        @edit="handleEdit"
-        @delete="handleDeleteRequest"
-      />
+  <div>
+    <div v-if="!currentUser">
+      <p>Unauthorized</p>
     </div>
 
-    <!-- Open the modal using ID.showModal() method -->
-    <dialog class="modal" :open="showModal">
-      <div class="modal-box">
-        <ProjectForm
-          :project-data="editingProject || projectData"
-          :is-submitting="isSubmitting"
-          @show-modal="showModal = false"
-          @submit="handleSubmit"
+    <div v-else class="flex flex-col my-10 nintendo-text md:p-16">
+      <div class="flex flex-col justify-between md:flex-row gap-4">
+        <p class="capitalize text-xs md:text-3xl">
+          dashboard
+        </p>
+        <button
+          class="btn btn-neutral"
+          @click="handleOpen"
+        >
+          Add a project
+        </button>
+      </div>
+      <div class="my-10 flex flex-wrap gap-4 md:flex-row">
+        <ProjectList
+          :projects="projects"
+          @edit="handleEdit"
+          @delete="handleDeleteRequest"
         />
       </div>
-    </dialog>
 
-    <dialog class="modal" :open="showDeleteConfirm">
-      <div class="modal-box flex flex-col gap-4">
-        <p>Are you sure you want to delete this project?</p>
-        <div class="flex justify-end gap-2 w-full">
-          <button class="btn" @click="cancelDelete">
-            Cancel
-          </button>
-          <button class="btn btn-error" @click="confirmDelete">
-            Yes, Delete
-          </button>
+      <!-- Open the modal using ID.showModal() method -->
+      <dialog class="modal" :open="showModal">
+        <div class="modal-box">
+          <ProjectForm
+            :project-data="editingProject || projectData"
+            :is-submitting="isSubmitting"
+            @show-modal="showModal = false"
+            @submit="handleSubmit"
+          />
         </div>
-      </div>
-    </dialog>
+      </dialog>
 
-    <div v-if="toastMessage" class="toast toast-top toast-end z-50 fixed right-4 top-4">
-      <div :class="`alert alert-${toastType}`">
+      <dialog class="modal" :open="showDeleteConfirm">
+        <div class="modal-box flex flex-col gap-4">
+          <p>Are you sure you want to delete this project?</p>
+          <div class="flex justify-end gap-2 w-full">
+            <button class="btn" @click="cancelDelete">
+              Cancel
+            </button>
+            <button class="btn btn-error" @click="confirmDelete">
+              Yes, Delete
+            </button>
+          </div>
+        </div>
+      </dialog>
+    </div>
+    <div v-if="toastMessage" class="toast toast-top toast-end z-50 fixed right-4 top-4 nintendo-text">
+      <div role="alert" :class="`alert alert-${toastType}`">
         <span>{{ toastMessage }}</span>
       </div>
     </div>

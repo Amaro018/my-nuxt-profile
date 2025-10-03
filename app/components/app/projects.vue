@@ -91,21 +91,23 @@ function prevPage() {
         :transition="{ duration: 0.6, delay: index * 0.15 }"
         :while-hover="{ scale: 1.05 }"
       >
-        <figure>
-          <img
-            :src="project.image"
-            alt="Project"
-            class="h-48 w-full object-cover"
-          >
+        <figure class="relative">
+          <div>
+            <p class="badge badge-accent absolute top-3 right-0 font-bold">
+              {{ project.category }}
+            </p>
+            <img
+              :src="project.image"
+              alt="Project"
+              class="h-48 w-full object-cover"
+            >
+          </div>
         </figure>
         <div class="card-body">
           <h2 class="card-title">
             {{ project.name }}
           </h2>
           <p>{{ project.description }}</p>
-          <p class="badge badge-outline">
-            {{ project.category }}
-          </p>
 
           <div class="card-actions justify-center mt-2">
             <div class="flex flex-col gap-2 w-full sm:flex-row sm:w-auto">

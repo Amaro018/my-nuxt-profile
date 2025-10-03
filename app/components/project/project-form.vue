@@ -28,11 +28,11 @@ async function handleSubmit() {
 
   // Clear form (reset fields to default/empty values)
   localProjectData.value = {
-    name: '',
-    description: '',
-    category: '',
-    live_demo: '',
-    github_link: '',
+    name: props.projectData.name || '',
+    description: props.projectData.description || '',
+    category: props.projectData.category || '',
+    live_demo: props.projectData.live_demo || '',
+    github_link: props.projectData.github_link || '',
     imageFile: null,
   };
   imageUrl.value = null;
@@ -60,6 +60,24 @@ function handleFileChange(event: Event) {
     imageUrl.value = null;
   }
 }
+
+watch(
+  () => props.projectData,
+  (newProject) => {
+    localProjectData.value = {
+      name: newProject.name || '',
+      description: newProject.description || '',
+      category: newProject.category || '',
+      live_demo: newProject.live_demo || '',
+      github_link: newProject.github_link || '',
+      imageFile: null,
+      // keep id for update
+    };
+    // Optionally show current image preview if editing
+    imageUrl.value = newProject.image ? newProject.image : null;
+  },
+  { immediate: true, deep: true },
+);
 </script>
 
 <template>

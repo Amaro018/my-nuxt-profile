@@ -1,5 +1,7 @@
 <script setup lang="ts">
 defineProps<{ projects: any }>();
+
+defineEmits(['edit', 'delete']);
 </script>
 
 <template>
@@ -21,8 +23,11 @@ defineProps<{ projects: any }>();
       </h2>
       <p>{{ project.description }}</p>
       <div class="card-actions justify-end">
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" @click="$emit('edit', project)">
           edit
+        </button>
+        <button class="btn btn-error" @click="$emit('delete', project.id)">
+          Delete
         </button>
       </div>
     </div>

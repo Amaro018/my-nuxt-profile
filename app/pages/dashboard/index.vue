@@ -1,7 +1,13 @@
 <script setup lang="ts">
+import type { Project } from '~~/server/lib/zod-schema';
+
+import { useToast } from '../../composables/use-toast';
+
 useHead({
   title: 'Jun Dashboard',
 });
+
+const { toastMessage, toastType, showToast } = useToast();
 type SessionUser = {
   id: number;
   name: string;
@@ -14,8 +20,13 @@ const { data: projects, refresh } = useFetch('/api/project');
 const { user } = useUserSession();
 
 const currentUser = computed(() => user.value as SessionUser);
-
+const editingProject = ref<Project | null>(null);
 const showModal = ref(false);
+
+function handleEdit(project: any) {
+  editingProject.value = project;
+  showModal.value = true;
+}
 
 const isSubmitting = ref(false);
 function handleOpen() {
@@ -42,25 +53,60 @@ async function handleSubmit(data: typeof projectData.value) {
   payload.append('github_link', data.github_link);
 
   if (data.imageFile) {
-    payload.append('imageFile', data.imageFile); // append the File
+    payload.append('imageFile', data.imageFile);
   }
 
   try {
-    await $fetch('/api/project', {
-      method: 'POST',
-      body: payload,
-    });
-
-    console.warn('Project created successfully');
+    // Check if we're editing an existing project
+    if (editingProject.value && editingProject.value.id) {
+      // Update existing project
+      payload.append('id', editingProject.value.id.toString());
+      await $fetch('/api/project', {
+        method: 'PUT', // or 'PUT' depending on your backend
+        body: payload,
+      });
+      showToast('Project updated successfully', 'success');
+    }
+    else {
+      // Create new project
+      await $fetch('/api/project', {
+        method: 'POST',
+        body: payload,
+      });
+      console.warn('Project created successfully');
+    }
   }
   catch (e) {
     console.error(e);
   }
   finally {
     isSubmitting.value = false;
-
+    showModal.value = false;
+    editingProject.value = null; // Reset after submit
     refresh();
   }
+}
+
+const showDeleteConfirm = ref(false);
+const pendingDeleteId = ref<number | null>(null);
+
+function handleDeleteRequest(projectId: number) {
+  pendingDeleteId.value = projectId;
+  showDeleteConfirm.value = true;
+}
+
+async function confirmDelete() {
+  if (pendingDeleteId.value) {
+    await $fetch(`/api/project?id=${pendingDeleteId.value}`, { method: 'DELETE' });
+    showToast('Project deleted successfully', 'success');
+    refresh();
+    pendingDeleteId.value = null;
+    showDeleteConfirm.value = false;
+  }
+}
+function cancelDelete() {
+  pendingDeleteId.value = null;
+  showDeleteConfirm.value = false;
 }
 </script>
 
@@ -82,19 +128,43 @@ async function handleSubmit(data: typeof projectData.value) {
       </button>
     </div>
     <div class="my-10 flex flex-wrap gap-4 md:flex-row">
-      <ProjectList :projects="projects" />
+      <ProjectList
+        :projects="projects"
+        @edit="handleEdit"
+        @delete="handleDeleteRequest"
+      />
     </div>
 
     <!-- Open the modal using ID.showModal() method -->
     <dialog class="modal" :open="showModal">
       <div class="modal-box">
         <ProjectForm
-          :project-data="projectData"
+          :project-data="editingProject || projectData"
           :is-submitting="isSubmitting"
           @show-modal="showModal = false"
           @submit="handleSubmit"
         />
       </div>
     </dialog>
+
+    <dialog class="modal" :open="showDeleteConfirm">
+      <div class="modal-box flex flex-col gap-4">
+        <p>Are you sure you want to delete this project?</p>
+        <div class="flex justify-end gap-2 w-full">
+          <button class="btn" @click="cancelDelete">
+            Cancel
+          </button>
+          <button class="btn btn-error" @click="confirmDelete">
+            Yes, Delete
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <div v-if="toastMessage" class="toast toast-top toast-end z-50 fixed right-4 top-4">
+      <div :class="`alert alert-${toastType}`">
+        <span>{{ toastMessage }}</span>
+      </div>
+    </div>
   </div>
 </template>

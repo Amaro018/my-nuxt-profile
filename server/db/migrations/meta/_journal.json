@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1759156958955,
+      "tag": "0000_fast_morlocks",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1759166309223,
+      "tag": "0001_noisy_amphibian",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1759167971113,
+      "tag": "0002_youthful_lady_vermin",
+      "breakpoints": true
+    }
+  ]
+}

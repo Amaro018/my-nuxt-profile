@@ -1,6 +1,13 @@
 services:
   app:
+    container_name: jhomari-profile
     build: .
     ports:
       - "3000:3000"
     restart: always
+    networks:
+      - cloudflare_net
+
+networks:
+  cloudflare_net:
+    external: true

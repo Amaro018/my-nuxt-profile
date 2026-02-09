@@ -1,5 +1,12 @@
-# Use Node.js 22 alpine image for smaller size
-FROM node:22-alpine AS builder
+# Use Node.js 22 slim image for better compatibility with native modules
+FROM node:22-slim AS builder
+
+# Install build dependencies for native modules
+RUN apt-get update && apt-get install -y \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -14,7 +21,7 @@ COPY . .
 RUN npm run build
 
 # Production image
-FROM node:22-alpine
+FROM node:22-slim
 
 WORKDIR /app
 
